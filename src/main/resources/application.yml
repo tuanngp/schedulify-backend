@@ -1,4 +1,10 @@
 spring:
+  application:
+    name: Schedulify API
+  security:
+    user:
+      name: admin
+      password: admin
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/schedulify}
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
@@ -18,15 +24,12 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} traceId=[%X{traceId}] - %msg%n"
   level:
-    root: INFO
-    com.schedulify.backend: DEBUG
-    org.springframework: INFO
-    org.hibernate: INFO
+    root: WARN
+    com.schedulify.backend: INFO
+    org.springframework: WARN
     org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.orm.jdbc.bind: TRACE
 
 # Server configuration
 server:
   port: 8080
-  servlet:
-    context-path: /api

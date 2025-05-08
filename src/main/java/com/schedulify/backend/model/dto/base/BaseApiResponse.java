@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ApiResponse<T> {
+public class BaseApiResponse<T> {
 
     private boolean success;
 
@@ -42,8 +42,8 @@ public class ApiResponse<T> {
     }
 
     // Static factory methods for common responses
-    public static <T> ApiResponse<T> success(T data) {
-        return ApiResponse.<T>builder()
+    public static <T> BaseApiResponse<T> success(T data) {
+        return BaseApiResponse.<T>builder()
                 .success(true)
                 .message("Success")
                 .status(HttpStatus.OK.value())
@@ -52,8 +52,8 @@ public class ApiResponse<T> {
                 .build();
     }
 
-    public static <T> ApiResponse<T> success(T data, String message) {
-        return ApiResponse.<T>builder()
+    public static <T> BaseApiResponse<T> success(T data, String message) {
+        return BaseApiResponse.<T>builder()
                 .success(true)
                 .message(message)
                 .status(HttpStatus.OK.value())
@@ -62,8 +62,8 @@ public class ApiResponse<T> {
                 .build();
     }
 
-    public static <T> ApiResponse<T> created(T data) {
-        return ApiResponse.<T>builder()
+    public static <T> BaseApiResponse<T> created(T data) {
+        return BaseApiResponse.<T>builder()
                 .success(true)
                 .message("Created successfully")
                 .status(HttpStatus.CREATED.value())
@@ -72,8 +72,8 @@ public class ApiResponse<T> {
                 .build();
     }
 
-    public static <T> ApiResponse<T> error(String message, HttpStatus status) {
-        return ApiResponse.<T>builder()
+    public static <T> BaseApiResponse<T> error(String message, HttpStatus status) {
+        return BaseApiResponse.<T>builder()
                 .success(false)
                 .message(message)
                 .status(status.value())
@@ -81,7 +81,7 @@ public class ApiResponse<T> {
                 .build();
     }
 
-    public static <T> ApiResponse<T> pagination(T data, int page, int size, long totalElements, int totalPages) {
+    public static <T> BaseApiResponse<T> pagination(T data, int page, int size, long totalElements, int totalPages) {
         MetaData meta = MetaData.builder()
                 .page(page)
                 .size(size)
@@ -89,7 +89,7 @@ public class ApiResponse<T> {
                 .totalPages(totalPages)
                 .build();
 
-        return ApiResponse.<T>builder()
+        return BaseApiResponse.<T>builder()
                 .success(true)
                 .message("Success")
                 .status(HttpStatus.OK.value())

@@ -38,3 +38,5 @@ out/
 
 ### Logs ###
 /logs
+.cursor/*
+.env

@@ -32,22 +32,43 @@ dependencies {
     implementation 'org.springframework:spring-aspects'
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.flywaydb:flyway-database-postgresql'
-    
     // OpenAPI/Swagger dependencies
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5'
-    
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'org.postgresql:postgresql'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     // Logging
     implementation 'org.slf4j:slf4j-api'
     implementation 'ch.qos.logback:logback-classic'
+    // https://mvnrepository.com/artifact/org.mapstruct/mapstruct
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    compileOnly 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs = [
+        '-Amapstruct.defaultComponentModel=spring',
+        '-Amapstruct.unmappedTargetPolicy=IGNORE'
+    ]
+}
+
+tasks.named('clean') {
+    delete "build", "out"
+}
+
+tasks.named('compileJava') {
+    options.annotationProcessorPath = configurations.annotationProcessor
 }

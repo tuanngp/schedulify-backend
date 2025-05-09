@@ -1,6 +1,6 @@
 package com.schedulify.backend.utils;
 
-import com.schedulify.backend.model.dto.base.BaseApiResponse;
+import com.schedulify.backend.model.dto.BaseApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

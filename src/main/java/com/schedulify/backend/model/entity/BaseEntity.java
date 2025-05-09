@@ -1,8 +1,7 @@
 package com.schedulify.backend.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -21,9 +20,8 @@ import java.time.LocalDateTime;
  * @author Schedulify Team
  * @version 1.0
  */
-@Getter
-@Setter
 @MappedSuperclass
+@Data
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity implements Serializable {
 
@@ -76,17 +74,17 @@ public abstract class BaseEntity implements Serializable {
      * Flag indicating if the entity has been soft deleted.
      * True means the entity is considered deleted but remains in the database.
      */
-    @Column(name = "is_deleted", nullable = false)
-    private Boolean isDeleted = false;
+    @Column(name = "is_active", nullable = false)
+    private boolean active = true;
 
     /**
      * Callback method that is executed before the entity is persisted.
      * Sets initial timestamps for creation and modification.
      */
     @PrePersist
-    public void prePersist() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
     }
 
     /**
@@ -94,7 +92,7 @@ public abstract class BaseEntity implements Serializable {
      * Updates the last modified timestamp.
      */
     @PreUpdate
-    public void preUpdate() {
-        this.updatedAt = LocalDateTime.now();
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
     }
 }

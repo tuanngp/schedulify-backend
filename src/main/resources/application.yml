@@ -50,3 +50,20 @@ logging:
 # Server configuration
 server:
   port: 8080
+
+social:
+  facebook:
+    app-id: ${FACEBOOK_APP_ID}
+    app-secret: ${FACEBOOK_APP_SECRET}
+    api-version: ${FACEBOOK_API_VERSION}
+    graph-url: ${FACEBOOK_GRAPH_URL}
+  instagram:
+    app-id: ${INSTAGRAM_APP_ID}
+    app-secret: ${INSTAGRAM_APP_SECRET}
+    api-version: ${INSTAGRAM_API_VERSION}
+    graph-url: ${INSTAGRAM_GRAPH_URL}
+  threads:
+    app-id: ${THREADS_APP_ID}
+    app-secret: ${THREADS_APP_SECRET}
+    api-version: ${THREADS_API_VERSION}
+    graph-url: ${THREADS_GRAPH_URL}
